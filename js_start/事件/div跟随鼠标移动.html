@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            // document.onclick=function(ev){
+            //     var oEvent = ev||event;
+            //     var oClientX = oEvent.clientX;
+            //     var oClientY = oEvent.clientY;
+            //     console.log("("+oClientX+","+oClientY+")");
+            // }
+            document.onmousemove = function(ev){
+                move(ev);
+            }
+            function move(ev) {
+                var oEvent = ev || event;
+                var disX = oEvent.clientX;
+                var disY = oEvent.clientY;
+                var oDiv = document.getElementById("div1");
+                var scollLeft = document.documentElement.scrollLeft||document.body.scrollLeft;
+                var scollTop = document.documentElement.scrollTop||document.body.scrollTop;
+                console.log("disX:"+disX);
+                console.log("disY:"+disY);
+                console.log("scollLeft:"+scollLeft);
+                console.log("scollTop:"+scollTop);
+                oDiv.style.left = disX+scollLeft- 100 + "px";
+                oDiv.style.top = disY+scollTop - 100 + "px";
+                oDiv.onclick = function (newev) {
+                    var oEvent = newev || event;
+                    // alert(document.onmousemove);
+                    if (!document.onmousemove) {
+                        document.onmousemove = function (ev) {
+                            move(ev);
+                        }
+                    } else {
+                        document.onmousemove = null;
+                    }
+
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1"></div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var oBtn = document.getElementById("btn");
+            var oText = document.getElementById("text");
+            var oArea = document.getElementById("area");
+            oBtn.onclick = function () {
+                oArea.value += oText.value + "\n";
+                oText.value = null;
+            }
+            oText.onkeydown = function (ev) {
+                var oEvent = ev || event;
+                if (oEvent.keyCode == 13) {
+                    oArea.value += oText.value + "\n";
+                    oText.value = null;
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <textarea id="area" rows="40" cols="100"></textarea><br/>
+    <input id="text" type="text" />
+    <input id="btn" type="button" value="留言" />
+</body>
+
+</html>
