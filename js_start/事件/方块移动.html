@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            document.onkeydown = function (ev) {
+                var oEvent = ev || event;
+                var oDiv = document.getElementById("div1");
+
+                if (38 == oEvent.keyCode) {
+                    console.log("上");
+                    oDiv.style.top = oDiv.offsetTop - 20 + "px";
+                    checkAndResize(oDiv);
+                }
+                if (40 == oEvent.keyCode) {
+                    console.log("下");
+                    oDiv.style.top = oDiv.offsetTop + 20 + "px";
+                    checkAndResize(oDiv);
+                }
+                if (37 == oEvent.keyCode) {
+                    console.log("左");
+                    oDiv.style.left = oDiv.offsetLeft - 20 + "px";
+                    checkAndResize(oDiv);
+                }
+                if (39 == oEvent.keyCode) {
+                    console.log("右");
+                    oDiv.style.left = oDiv.offsetLeft + 20 + "px";
+                    checkAndResize(oDiv);
+                }
+
+                function checkAndResize(oDiv) {
+                    if (oDiv.offsetTop >= document.documentElement.clientHeight) {
+                        oDiv.style.top = document.documentElement.clientHeight+"px";
+                    }
+                    if (oDiv.offsetTop <= 0) {
+                        oDiv.style.top = 0+"px";
+                    }
+                    if (oDiv.offsetLeft >= document.documentElement.clientWidth) {
+                        oDiv.style.left = document.documentElement.clientWidth+"px";
+                    }
+                    if (oDiv.offsetLeft <= 0) {
+                        oDiv.style.left = 0+"px";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1"></div>
+</body>
+
+</html>
