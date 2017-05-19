@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: rebeccapurple;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+        function setCookie(key,value,day){
+            document.cookie=key+"="+value+";expires="+new Date()+day;
+        }
+        function getCookie(key){
+            key = key.trim();
+            var cookies = document.cookie.split(";");
+            for(var x = 0;x<cookies.length;x++){
+                var oneCookie = cookies[x];
+                var tmpKey = oneCookie.split("=")[0].trim();
+                if(key==tmpKey){
+                    return oneCookie.split("=")[1];
+                }else{
+                    continue;
+                }
+            }
+        }
+        function removeCookie(key){
+            var value = getCookie(key);
+            setCookie(key,value,-1);
+        }
+        window.onload=function(){
+               oDiv = document.getElementById('div1');
+               var x = getCookie('x');
+               var y = getCookie('y')
+               if(x){
+                  oDiv.style.left = x+'px';
+                  oDiv.style.top = y+'px';
+               }
+               
+            document.onmousedown = function(ev){
+                 var oEvent = ev||event;
+                 var disx = oEvent.clientX-oDiv.offsetLeft;
+                 var disy = oEvent.clientY-oDiv.offsetTop;
+                document.onmousemove = function(ev2){
+                    var oEvent2=ev2||event;
+                    oDiv.style.left=oEvent2.clientX-disx+"px";
+                    oDiv.style.top=oEvent2.clientY-disy+"px";
+                }
+                document.onmouseup = function(ev3){
+                    var oEvent3 = ev3||event;
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    setCookie('x',oDiv.offsetLeft,5);
+                    setCookie('y',oDiv.offsetTop,5);
+                }
+            } 
+              
+        }
+    </script>
+</head>
+<body>
+   <div id="div1"></div>
+</body>
+</html>

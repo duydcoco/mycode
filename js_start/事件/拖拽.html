@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
+    <style type="text/css">
         #div1{
             width: 100px;
             height: 100px;
@@ -13,9 +13,24 @@
             position: absolute;
         }
     </style>
-    <script>
+    <script type="text/javascript">
         window.onload=function(){
-            
+            oDiv = document.getElementById('div1');
+            document.onmousedown = function(ev){
+                var oEvent = ev||event;
+                var disx = oEvent.clientX-oDiv.offsetLeft;
+                var disy = oEvent.clientY-oDiv.offsetTop;
+                document.onmousemove = function(ev2){
+                    var oEvent2=ev2||event;
+                    oDiv.style.left=oEvent2.clientX-disx+"px";
+                    oDiv.style.top=oEvent2.clientY-disy+"px";
+                }
+                document.onmouseup = function(ev3){
+                    var oEvent3 = ev3||event;
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            } 
         }
     </script>
 </head>
